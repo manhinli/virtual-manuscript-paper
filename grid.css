@@ -1,0 +1,61 @@
+/* Virtual manuscript grid/pattern */
+
+#grid {
+    line-height: 1.5;
+    
+    border: 0;
+    padding: 0;
+    
+    color: black;
+    
+    border-top: 1px solid #CCECCE;
+    border-bottom: 1px solid #CCECCE;
+    
+    min-height: 1em;
+    
+    writing-mode: tb-rl;
+    -webkit-writing-mode: vertical-rl;
+    -ms-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+    
+    word-break: break-all;
+    
+    /* The virtual "grid" is comprised of four layers:
+        - vertical white stripes, which cover over the horizontal lines that
+            shouldn't appear in the line break;
+        - horizontal lines
+        - two sets of vertical lines, one for each side of the column */
+    background: 
+        linear-gradient(to right, transparent 0%, transparent 1px, white 1px, white 0.5em, transparent 0.5em, transparent 100%),
+        linear-gradient(to bottom, #CCECCE 0%, #CCECCE 1px, transparent 1px, transparent 100%),
+        linear-gradient(to right, #CCECCE 0%, #CCECCE 1px, transparent 1px, transparent 100%), 
+        linear-gradient(to right, #CCECCE 0%, #CCECCE 1px, transparent 1px, transparent 100%),
+        white;
+    
+    /* The width of a "grid" cell is 1em + 0.5em for the line break */
+    background-size: 1.5em 1em;
+    
+    /* We translate the positions of the lines into place */
+    background-position: 0 0, 0 -1px, 0 -1px, 0.5em 0px;
+}
+
+/* Some special alignment for text inside the grid to make it line up and allow
+   the border to fit properly */
+#grid > div {
+    padding: 0 0.25em 0 0;
+    margin: 0 1px -1px 0.25em;
+    font-size: 1em;
+}
+
+/* Depending on how contenteditable regions are handled, this is necessary to
+   prevent misalignment */
+#grid > div > * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* Font choice is important to get the full-width experience working right! */
+#grid {
+    font-family: "Yu Mincho", "Kozuka Mincho Pro", "Hiragino Mincho Pro", "MS Mincho", serif;
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>nya.nz / Virtual Japanese Manuscript Paper</title>
+        
+        <link href="grid.css" rel="stylesheet">
+        <style>
+            html, body {
+                box-sizing: border-box;
+                
+                padding: 0;
+                margin: 0;
+                
+                height: 100%;
+            }
+
+            *, *:before, *:after {
+                box-sizing: inherit;
+            }
+
+            #grid {
+                font-size: 2em;
+                display: inline-block;
+            }
+            
+            #grid > div {
+                height: 20em;
+            }
+            
+            #grid > div:focus {
+                outline: 0;
+            }
+
+            #table-layout-wrapper {
+                display: table;
+                table-layout: fixed;
+                
+                padding: 0;
+                margin: 0;
+                border: 0;
+                border-collapse: collapse;
+                
+                width: 100%;
+                height: 100%;
+                
+                background: #f5f5f5;
+            }
+
+            .cell {
+                display: table-cell;
+                height: 100%;
+                
+                vertical-align: top;
+                
+                position: relative;
+            }
+
+            .cell.desc {
+                padding: 2em 1em 2em 2em;
+                width: 20em;
+            }
+
+            .cell.manuscript {
+                padding: 1em;
+            }
+            
+            #grid-container {
+                background: #fff;
+                
+                position: relative;
+                
+                padding: 2em;
+                overflow-x: auto;
+                
+                z-index: 1;
+                
+                box-shadow: 5px 5px 10px #eee;
+            }            
+            
+            @media print {
+                #table-layout-wrapper,
+                #grid-container,
+                .cell.manuscript {
+                    background: none;
+                    
+                    box-shadow: none;
+                    
+                    padding: 0;
+                    margin: 0;
+                    
+                    
+                    overflow: visible;
+                }
+                
+                .cell.desc {
+                    display: none;
+                }
+                
+                #grid {
+                    border-top: 1px solid darkgreen;
+                    border-bottom: 1px solid darkgreen;
+                
+                    background: 
+                        linear-gradient(to right, transparent 0%, transparent 1px, white 1px, white 0.5em, transparent 0.5em, transparent 100%),
+                        linear-gradient(to bottom, darkgreen 0%, darkgreen 1px, transparent 1px, transparent 100%),
+                        linear-gradient(to right, darkgreen 0%, darkgreen 1px, transparent 1px, transparent 100%), 
+                        linear-gradient(to right, darkgreen 0%, darkgreen 1px, transparent 1px, transparent 100%),
+                        white;
+                    
+                    background-size: 1.5em 1em;
+                    
+                    background-position: 0 0, 0 -1px, 0 -1px, 0.5em 0px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="table-layout-wrapper">
+            <div class="cell desc">
+                <a href="https://nya.nz">nya.nz</a>
+                <h1>Virtual Japanese Manuscript Paper</h1>
+                <p>An experiment created entirely with CSS without the use of images or JavaScript.</p>
+                <p>Feel free to edit the text!</p>
+                <p><button id="change-font">Change font</button></p>
+                <p><button id="fill-20-col">Fill with 20 blank columns</button></p>
+            </div>
+            <div class="cell manuscript">
+                <div id="grid-container">
+                    <div id="grid" lang="ja">
+                        <div tabindex="1" contenteditable>これはバーチャル原稿用紙です。<br><br>This is virtual manuscript paper.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function swapFont() {
+                document.getElementById("grid").style.fontFamily = prompt("Enter font name. Leave blank to reset to default.");
+            }
+            
+            function fillCol(count) {
+                var colString = "";
+                while (count--) colString += "<br>";
+                document.querySelector("#grid > div").innerHTML = colString;
+            }
+        
+            document.getElementById("change-font").addEventListener('click', swapFont);
+            document.getElementById("fill-20-col").addEventListener('click', function(){fillCol(20)});
+        </script>
+    </body>
+</html>
