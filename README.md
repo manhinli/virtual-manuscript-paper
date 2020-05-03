@@ -3,7 +3,7 @@
 Virtual Japanese manuscript paper created purely with HTML and CSS, made for fun.
 
 ## Demo
-https://nya.nz/manuscript-paper
+https://static.nya.nz/manuscript-paper
 
 ## Description
 Manuscript paper is used generally for Japanese handwriting or nicely laid out
